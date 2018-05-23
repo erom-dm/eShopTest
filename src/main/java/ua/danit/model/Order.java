@@ -6,6 +6,17 @@ public class Order
 	private String itemId;
 	private Integer amount;
 	private String clientId;
+	private Integer cartId;
+
+	public Integer getCartId()
+	{
+		return cartId;
+	}
+
+	public void setCartId(Integer cartId)
+	{
+		this.cartId = cartId;
+	}
 
 	public Integer getOrderId()
 	{
