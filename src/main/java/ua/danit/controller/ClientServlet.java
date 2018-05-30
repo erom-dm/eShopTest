@@ -29,7 +29,7 @@ public class ClientServlet extends HttpServlet
 		Client client = clientDAO.get((String)login);
 		if(client != null && pass.equals(client.getPassword())){
 			PrintWriter writer = resp.getWriter();
-			writer.print("<h1>Congrats! You are user!</h1> \n go get some sleep");
+			writer.print("<h1>Congrats! You are user!</h1> \n...go get some sleep...");
 		} else {
 			resp.sendRedirect("/shop-servlet");
 		}
