@@ -10,10 +10,10 @@ public class HtmlUtil
 	static final String userDir = System.getProperty("user.dir");
 	static final String sep = System.getProperty("file.separator");
 
-	public static String readLandingPage()
+	public static String readPage(String fileName)
 	{
 		String outText = "";
-		String filepath = userDir + sep + "lib" + sep + "html" + sep + "index.html";
+		String filepath = userDir + sep + "lib" + sep + "html" + sep + fileName;
 		try(FileReader reader = new FileReader(filepath);
 			BufferedReader buffReader = new BufferedReader(reader))
 		{

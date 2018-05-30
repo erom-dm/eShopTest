@@ -16,11 +16,24 @@ public class ShopServlet extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		PrintWriter writer = resp.getWriter();
-		writer.print(HtmlUtil.readLandingPage());
+		writer.print(HtmlUtil.readPage("index.html"));
 	}
 
-	@Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
-		doGet(req, resp);
+		String action = req.getParameter("action");
+		if(action.equals("regNew")){
+			PrintWriter writer = resp.getWriter();
+			writer.print(HtmlUtil.readPage("new-user.html"));
+		} else {
+			doGet(req, resp);
+		}
+	}
+
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+
 	}
 }

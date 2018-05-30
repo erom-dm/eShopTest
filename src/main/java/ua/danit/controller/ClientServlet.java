@@ -23,25 +23,49 @@ public class ClientServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
-		String    login  = (String) req.getParameter("login");
-		String    pass   = (String) req.getParameter("pass");
+		String action = req.getParameter("action");
+		/*if(action == null || action.isEmpty()){
+			action = req.getHeader("action");
+		}*/
 		ClientDAO clientDAO = new ClientDAO();
-		Client client = clientDAO.get((String)login);
-		if(client != null && pass.equals(client.getPassword())){
-			PrintWriter writer = resp.getWriter();
-			writer.print("<h1>Congrats! You are user!</h1> \n...go get some sleep...");
-		} else {
-			PrintWriter writer = resp.getWriter();
-			writer.print("Wrong client login or password, dumass!");
-			try
-			{
-				Thread.sleep(5000);
+		if(action.equals("create"))
+		{
+			String    login     = req.getParameter("login");
+			String    pass      = req.getParameter("pass");
+			String    checkPass     = req.getParameter("checkPass");
+			String    firstName      = req.getParameter("firstName");
+			String    secondName      = req.getParameter("secondName");
+			if(!pass.equals(checkPass)){
+				resp.addHeader("action", "create");
+				resp.sendRedirect("/client");
 			}
-			catch ( InterruptedException e )
-			{
-				e.printStackTrace();
+			Client client = new Client();
+			client.setLogin(login);
+			client.setPassword(pass);
+			client.setFirstName(firstName);
+			client.setSecondName(secondName);
+			clientDAO.save(client);
+
+			Client clientFromDB = clientDAO.get((String)client.getLogin());
+			if(clientFromDB != null){
+				PrintWriter writer = resp.getWriter();
+				writer.print("<h1>Congrats! You are registered!</h1> \n...go get some sleep...");
 			}
-			resp.sendRedirect("/shop-servlet");
+		}
+		else if(action.equals("checkLogin"))
+		{
+			String    login     = req.getParameter("login");
+			String    pass      = req.getParameter("pass");
+			Client    client    = clientDAO.get((String) login);
+			if ( client != null && pass.equals(client.getPassword()) )
+			{
+				PrintWriter writer = resp.getWriter();
+				writer.print("<h1>Congrats! You are user!</h1> \n...go get some sleep...");
+			}
+			else
+			{
+				resp.sendRedirect("/shop-servlet");
+			}
 		}
 	}
 
