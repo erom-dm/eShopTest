@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ua.danit.utils.HtmlUtil;
 
 @WebServlet("/shop-servlet")
 public class ShopServlet extends HttpServlet
@@ -15,6 +16,11 @@ public class ShopServlet extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		PrintWriter writer = resp.getWriter();
-		writer.print("");
+		writer.print(HtmlUtil.readLandingPage());
+	}
+
+	@Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		doGet(req, resp);
 	}
 }
