@@ -31,6 +31,16 @@ public class ClientServlet extends HttpServlet
 			PrintWriter writer = resp.getWriter();
 			writer.print("<h1>Congrats! You are user!</h1> \n...go get some sleep...");
 		} else {
+			PrintWriter writer = resp.getWriter();
+			writer.print("Wrong client login or password, dumass!");
+			try
+			{
+				Thread.sleep(5000);
+			}
+			catch ( InterruptedException e )
+			{
+				e.printStackTrace();
+			}
 			resp.sendRedirect("/shop-servlet");
 		}
 	}
