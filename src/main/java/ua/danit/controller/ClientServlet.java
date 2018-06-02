@@ -25,10 +25,8 @@ public class ClientServlet extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		String action = req.getParameter("action");
-		/*if(action == null || action.isEmpty()){
-			action = req.getHeader("action");
-		}*/
 		ClientDAO clientDAO = new ClientDAO();
+
 		if(action.equals("create"))
 		{
 			String    login     = req.getParameter("login");
@@ -40,7 +38,7 @@ public class ClientServlet extends HttpServlet
 			if(!pass.equals(checkPass)){
 				PrintWriter writer = resp.getWriter();
 				String outText = HtmlUtil.readPage("new-user.html");
-				String.format(outText, "Passwords are not the same!");
+				outText = String.format(outText, "Passwords are not the same!");
 
 				writer.print(outText);
 			}
@@ -50,7 +48,7 @@ public class ClientServlet extends HttpServlet
 				if(clientFromDB != null){
 					PrintWriter writer = resp.getWriter();
 					String outText = HtmlUtil.readPage("new-user.html");
-					String.format(outText, "Sorry, but this login already exists!");
+					outText = String.format(outText, "Sorry, but this login already exists!");
 
 					writer.print(outText);
 				}
@@ -65,7 +63,7 @@ public class ClientServlet extends HttpServlet
 					PrintWriter writer = resp.getWriter();
 					String outText = HtmlUtil.readPage("item-list.html");
 
-					String.format(outText, client.getFirstName() + " " + client.getSecondName(), client.getLogin(), HtmlUtil.getItems(login));
+					outText = String.format(outText, client.getFirstName() + " " + client.getSecondName(), client.getLogin(), HtmlUtil.getItems(login));
 
 					writer.print(outText);
 				}
@@ -80,12 +78,11 @@ public class ClientServlet extends HttpServlet
 			if ( client != null && pass.equals(client.getPassword()) )
 			{
 				PrintWriter writer = resp.getWriter();
-				String outText = HtmlUtil.readPage("edit-user.html").format("<h1>Congrats! You are user!</h1>", login);
+				String outText = HtmlUtil.readPage("item-list.html");
 
+				outText = String.format(outText, client.getFirstName() + " " + client.getSecondName(), client.getLogin(), HtmlUtil.getItems(login));
 
 				writer.print(outText);
-
-
 			}
 			else
 			{
@@ -94,39 +91,11 @@ public class ClientServlet extends HttpServlet
 		}
 		else if(action.equals("edit"))
 		{
-//			String    login     = req.getParameter("login");
-//			String    pass      = req.getParameter("pass");
-//			String    checkPass     = req.getParameter("checkPass");
-//			String    firstName      = req.getParameter("firstName");
-//			String    secondName      = req.getParameter("secondName");
-//			if(!pass.equals(checkPass)){
-//				resp.addHeader("action", "edit");
-//				resp.sendRedirect("/client");
-//			}
-//			Client client = new Client();
-//			client.setLogin(login);
-//			client.setPassword(pass);
-//			client.setFirstName(firstName);
-//			client.setSecondName(secondName);
-//			clientDAO.save(client);
-//
-//			Client clientFromDB = clientDAO.get((String)client.getLogin());
-//			if(clientFromDB != null){
-//				PrintWriter writer = resp.getWriter();
-//				writer.print("<h1>Congrats! You are registered!</h1> \n...go get some sleep...");
-//			}
+
 		}
-	}
+		else if(action.equals("delete"))
+		{
 
-	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-	{
-		super.doPut(req, resp);
-	}
-
-	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-	{
-		super.doDelete(req, resp);
+		}
 	}
 }

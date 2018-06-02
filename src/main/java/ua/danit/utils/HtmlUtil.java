@@ -82,7 +82,7 @@ public class HtmlUtil
 
 	private static String beautyPrice(Integer price)
 	{
-		String beautyPrice = String.format("%.2f", (double)(price/100));
+		String beautyPrice = String.format("%.2f", ((double)price)/100);
 		return beautyPrice+" UAH";
 	}
 }

@@ -26,7 +26,7 @@ public class ShopServlet extends HttpServlet
 		if(action.equals("regNew")){
 			PrintWriter writer = resp.getWriter();
 			String outText = HtmlUtil.readPage("new-user.html");
-			String.format(outText, "Input your credentials");
+			outText = String.format(outText, "Input your credentials");
 
 			writer.print(outText);
 		} else {

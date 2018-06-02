@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Edit user page</title>
+    <title>User page</title>
 </head>
 <body>
 <br>
@@ -19,5 +19,13 @@
     <input type="text" name="secondName" size="20" placeholder="input text">
     <input type="submit" value="EDIT USER">
 </form>
+
+<br>
+<form action="client" method="post">
+    <input type="hidden" value="delete" name="action">
+    <input type="hidden" name="login" value="%3s">
+     <input type="submit" value="DELETE USER">
+</form>
+
 </body>
 </html>
