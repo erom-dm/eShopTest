@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import ua.danit.model.Item;
 
 public class ItemDAO extends AbstractDAO<Item>
@@ -45,7 +47,8 @@ public class ItemDAO extends AbstractDAO<Item>
 		}
 	}
 
-	@Override public Item get(Object itemId)
+	@Override
+	public Item get(Object itemId)
 	{
 		Item item = new Item();
 
@@ -71,6 +74,35 @@ public class ItemDAO extends AbstractDAO<Item>
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public List<Item> getAll()
+	{
+		List<Item> items = new ArrayList<>();
+
+		String sql = "SELECT * FROM item";
+
+		try (
+			Connection        connection  = ConnectionToDB.getConnection();
+			PreparedStatement statement  = connection.prepareStatement(sql);
+			ResultSet rSet = statement.executeQuery();
+		)
+		{
+			while ( rSet.next() )
+			{
+				Item item = new Item();
+				item.setArticleId(rSet.getString("item_id"));
+				item.setName(rSet.getString("name"));
+				item.setPrice(rSet.getInt("price"));
+
+				items.add(item);
+			}
+		}
+		catch ( SQLException e )
+		{
+			e.printStackTrace();
+		}
+		return items;
 	}
 
 	@Override public void delete(Object itemId)
