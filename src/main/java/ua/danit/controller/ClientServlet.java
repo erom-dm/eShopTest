@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ua.danit.dao.ClientDAO;
 import ua.danit.model.Client;
+import ua.danit.utils.HtmlUtil;
 
 @WebServlet("/client")
 public class ClientServlet extends HttpServlet
@@ -60,12 +61,41 @@ public class ClientServlet extends HttpServlet
 			if ( client != null && pass.equals(client.getPassword()) )
 			{
 				PrintWriter writer = resp.getWriter();
-				writer.print("<h1>Congrats! You are user!</h1> \n...go get some sleep...");
+				String outText = HtmlUtil.readPage("edit-user.html").format("<h1>Congrats! You are user!</h1>", login);
+
+
+				writer.print(outText);
+
+
 			}
 			else
 			{
 				resp.sendRedirect("/shop-servlet");
 			}
+		}
+		else if(action.equals("edit"))
+		{
+//			String    login     = req.getParameter("login");
+//			String    pass      = req.getParameter("pass");
+//			String    checkPass     = req.getParameter("checkPass");
+//			String    firstName      = req.getParameter("firstName");
+//			String    secondName      = req.getParameter("secondName");
+//			if(!pass.equals(checkPass)){
+//				resp.addHeader("action", "edit");
+//				resp.sendRedirect("/client");
+//			}
+//			Client client = new Client();
+//			client.setLogin(login);
+//			client.setPassword(pass);
+//			client.setFirstName(firstName);
+//			client.setSecondName(secondName);
+//			clientDAO.save(client);
+//
+//			Client clientFromDB = clientDAO.get((String)client.getLogin());
+//			if(clientFromDB != null){
+//				PrintWriter writer = resp.getWriter();
+//				writer.print("<h1>Congrats! You are registered!</h1> \n...go get some sleep...");
+//			}
 		}
 	}
 
