@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import ua.danit.model.Cart;
 
+/**
+ * @author Alex Ignatenko
+ */
+
 public class CartDAO extends AbstractDAO<Cart>
 {
 
@@ -55,7 +59,8 @@ public class CartDAO extends AbstractDAO<Cart>
 		return null;
 	}
 
-	@Override public void delete(Object pk)
+	@Override
+	public void delete(Object pk)
 	{
 		String sql = "DELETE FROM cart WHERE id="+pk;
 
