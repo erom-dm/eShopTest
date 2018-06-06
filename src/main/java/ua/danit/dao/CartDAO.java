@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import ua.danit.model.Cart;
 
 public class CartDAO extends AbstractDAO<Cart>
@@ -66,5 +68,33 @@ public class CartDAO extends AbstractDAO<Cart>
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public List<Cart> getAllByLogin(String login)
+	{
+		List<Cart> carts = new ArrayList<>();
+
+		String sql = "SELECT DISTINCT id, time FROM cart "
+			+ "JOIN public.order AS ord ON cart.id = ord.cart_id "
+			+ "WHERE ord.client_id = '" + login + "'";
+
+		try ( Connection connection = ConnectionToDB.getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet rSet = statement.executeQuery(); )
+		{
+			while(rSet.next()){
+				Cart cart = new Cart();
+				cart.setCartID(rSet.getInt("id"));
+				cart.setCartTime(rSet.getLong("cart_time"));
+				carts.add(cart);
+			}
+		}
+		catch ( SQLException e )
+		{
+			e.printStackTrace();
+		}
+
+
+		return carts;
 	}
 }

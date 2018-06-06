@@ -3,8 +3,13 @@ package ua.danit.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import ua.danit.dao.CartDAO;
 import ua.danit.dao.ItemDAO;
+import ua.danit.model.Cart;
 import ua.danit.model.Item;
 
 public class HtmlUtil
@@ -75,7 +80,7 @@ public class HtmlUtil
 		outText += "\t<input type=\"hidden\" name=\"login\" value=\""+login+"\">\n";
 		outText += "\t<input type=\"hidden\" name=\"item\" value=\""+articleId+"\">\n";
 		outText += "\t<input type=\"submit\" value=\"Detail\">\n";
-		outText += "</form>";
+		outText += "</form>\n";
 
 		return outText;
 	}
@@ -84,5 +89,70 @@ public class HtmlUtil
 	{
 		String beautyPrice = String.format("%.2f", ((double)price)/100);
 		return beautyPrice+" UAH";
+	}
+
+	public static String getCarts(String login)
+	{
+		String outText="";
+
+		CartDAO cartDAO = new CartDAO();
+
+		List<Cart> carts = cartDAO.getAllByLogin(login);
+		if ( !carts.isEmpty() ){
+			outText += "<tr>\n";
+
+			outText += "<th>CART No\n";
+			outText += "</th>\n";
+
+			outText += "<th>SELL TIME\n";
+			outText += "</th>\n";
+
+			outText += "<th>DETAILS\n";
+			outText += "</th>\n";
+
+			outText += "</tr>\n";
+
+			int count = 1;
+			for ( Cart cart : carts ){
+
+				outText += "<tr>\n";
+
+				outText += "<td>\n";
+				outText += "cart " + count;
+				outText += "</td>\n";
+
+				outText += "<td>\n";
+				outText += beautyTime(cart.getCartTime());
+				outText += "</td>\n";
+
+				outText += "<td>\n";
+				outText += getCartDetailForm(cart);
+				outText += "</td>\n";
+
+				outText += "</tr>\n";
+
+				count++;
+			}
+		}
+
+		return outText;
+	}
+
+	private static String beautyTime(Long cartTime)
+	{
+		Date             date             = new Date(cartTime);
+		SimpleDateFormat formatForDate = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		return formatForDate.format(date);
+	}
+
+	private static String getCartDetailForm(Cart cart)
+	{
+		String outText = "";
+		outText += "<form action=\"order\">\n";
+		outText += "\t<input type=\"hidden\" name=\"action\" value=\"getByCart\">\n";
+		outText += "\t<input type=\"hidden\" name=\"cartId\" value=\""+cart.getCartID()+"\">\n";
+		outText += "\t<input type=\"submit\" value=\"More...\">\n";
+		outText += "</form>\n";
+		return outText;
 	}
 }

@@ -23,7 +23,7 @@ public class ShopServlet extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		String action = req.getParameter("action");
-		if(action.equals("regNew")){
+		if(action!=null && action.equals("regNew")){
 			PrintWriter writer = resp.getWriter();
 			String outText = HtmlUtil.readPage("new-user.html");
 			outText = String.format(outText, "Input your credentials");
@@ -34,9 +34,5 @@ public class ShopServlet extends HttpServlet
 		}
 	}
 
-	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-	{
 
-	}
 }
