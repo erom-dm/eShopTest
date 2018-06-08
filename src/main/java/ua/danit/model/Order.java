@@ -2,85 +2,78 @@ package ua.danit.model;
 
 import java.util.UUID;
 
-public class Order
-{
-	private Integer orderId;
+public class Order {
+    private Integer orderId;
 
-	private String  itemId;
+    private String itemId;
 
-	private Integer amount;
+    private Integer amount;
 
-	private String  clientId;
+    private String clientId;
 
-	private Integer cartId;
+    private Integer cartId;
 
-	public Integer getCartId()
-	{
-		return cartId;
-	}
+    public Integer getCartId() {
+        return cartId;
+    }
 
-	public void setCartId(Integer cartId)
-	{
-		this.cartId = cartId;
-	}
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
-	public Integer getOrderId()
-	{
-		return orderId;
-	}
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
+    }
 
-	public String getItemId()
-	{
-		return itemId;
-	}
+    public Integer getOrderId() {
+        return orderId;
+    }
 
-	public void setItemId(String itemId)
-	{
-		this.itemId = itemId;
-	}
+    public String getItemId() {
+        return itemId;
+    }
 
-	public Integer getAmount()
-	{
-		return amount;
-	}
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
 
-	public void setAmount(Integer amount)
-	{
-		this.amount = amount;
-	}
+    public Integer getAmount() {
+        return amount;
+    }
 
-	public String getClientId()
-	{
-		return clientId;
-	}
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-	public void setClientId(String clientId)
-	{
-		this.clientId = clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public Order()
-	{
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public Order() {
 		/*
 		vol. 1
 		 */
-		Long fullId = Math.abs(UUID.randomUUID().getMostSignificantBits());
-		while ( fullId > Integer.MAX_VALUE ){
-			fullId /= 10;
-		}
+        Long fullId = Math.abs(UUID.randomUUID().getMostSignificantBits());
+        while (fullId > Integer.MAX_VALUE) {
+            fullId /= 10;
+        }
 
 		/*
 		vol. 2
 		 */
-		fullId = (long)(Math.random()*Integer.MAX_VALUE);
+        fullId = (long) (Math.random() * Integer.MAX_VALUE);
 
 		/*
 		vol. 3
 		 */
-		UUID uniqueID = UUID.randomUUID();
-		String s = uniqueID.toString().replaceAll("[^0-9]", "");
-		int id = Integer.parseInt(s.substring(0, 8));
+        UUID uniqueID = UUID.randomUUID();
+        String s = uniqueID.toString().replaceAll("[^0-9]", "");
+        int id = Integer.parseInt(s.substring(0, 8));
 
-		this.orderId = Math.toIntExact(fullId);
-	}
+        this.orderId = Math.toIntExact(fullId);
+    }
 }
