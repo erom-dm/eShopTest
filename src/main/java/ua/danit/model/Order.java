@@ -60,10 +60,6 @@ public class Order
 		this.orderId = orderId;
 	}
 
-	public String getItemId()
-	{
-		return itemId;
-	}
     public String getItemId() {
         return itemId;
     }

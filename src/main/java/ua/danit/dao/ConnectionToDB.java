@@ -10,9 +10,9 @@ import java.sql.*;
 
 public class ConnectionToDB
 {
-	private static final String DB_URL = "jdbc:postgresql://localhost:5432/e-shop";
+	private static final String DB_URL = "jdbc:postgresql://localhost:5432/eShop";
 	private static final String USERNAME = "postgres";
-	private static final String USER_PASS = "12345";
+	private static final String USER_PASS = "242990";
 
 	/**
 	 *
