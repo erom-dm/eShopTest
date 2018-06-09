@@ -10,8 +10,8 @@
     <packaging>jar</packaging>
 
     <properties>
-    <jetty.version>9.4.6.v20170531</jetty.version>
-</properties>
+        <jetty.version>9.4.8.v20171121</jetty.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -39,6 +39,11 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
             <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
         </dependency>
     </dependencies>
 

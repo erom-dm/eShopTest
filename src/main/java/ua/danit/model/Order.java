@@ -10,7 +10,7 @@ public class Order
 
 	private Integer amount;
 
-	private String clientId;
+	private String  clientId;
 
 	private Integer cartId;
 
@@ -64,26 +64,25 @@ public class Order
 	{
 		return itemId;
 	}
+    public String getItemId() {
+        return itemId;
+    }
 
-	public void setItemId(String itemId)
-	{
-		this.itemId = itemId;
-	}
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
 
-	public Integer getAmount()
-	{
-		return amount;
-	}
+    public Integer getAmount() {
+        return amount;
+    }
 
-	public void setAmount(Integer amount)
-	{
-		this.amount = amount;
-	}
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-	public String getClientId()
-	{
-		return clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
 	public void setClientId(String clientId)
 	{
